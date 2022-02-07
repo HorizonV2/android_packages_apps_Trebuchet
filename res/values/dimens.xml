@@ -383,7 +383,6 @@
     <!-- side of start/end icon far from container edge -->
     <dimen name="system_shortcut_header_icon_padding_inner">12dp</dimen>
 
-
     <!-- Notifications -->
     <dimen name="bg_round_rect_radius">8dp</dimen>
     <dimen name="notification_container_height">104dp</dimen>
@@ -593,4 +592,9 @@
     <dimen name="overview_scroll_scale">0.9</dimen>
     <dimen name="overview_action_bottom_margin">52dp</dimen>
     <dimen name="overview_action_bottom_margin_taskbar">100dp</dimen>
+
+     <!-- Meminfo in overview -->
+     <dimen name="meminfo_bottom_margin_gesture">15dp</dimen>
+     <dimen name="meminfo_bottom_margin_three_button">15dp</dimen>
+
 </resources>
