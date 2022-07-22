@@ -176,6 +176,7 @@ public final class Utilities {
     public static final String KEY_SHOW_QUICKSPACE_WEATHER_TEXT = "pref_quickspace_weather_text";
     public static final String KEY_ALLOW_WALLPAPER_ZOOMING = "pref_allow_wallpaper_zooming";
     public static final String KEY_SHOW_HOTSEAT_SEARCH= "pref_show_hotseat_search";
+    public static final String KEY_RECENTS_MEMINFO = "pref_recents_meminfo";
 
     /**
      * Returns true if theme is dark.
@@ -1050,6 +1051,12 @@ public final class Utilities {
     public static boolean QuickSpaceShowWeatherText(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_SHOW_QUICKSPACE_WEATHER_TEXT, true);
+
+    }
+
+    public static boolean isShowMeminfo(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_RECENTS_MEMINFO, false);
     }
 
     public static boolean canZoomWallpaper(Context context) {

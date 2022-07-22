@@ -22,6 +22,7 @@
     <string name="quickspace_date_format" translatable="false">EEE, MMM d</string>
     <string name="quickspace_date_format_minimalistic" translatable="false">EEEE, MMMM d</string>
     <string name="quickspace_category_title">Quickspace</string>
+    <string name="actions_category_title">Quick actions</string>
 
     <!-- QuickSpace: QuickEvent: Device Intro Event -->
     <string name="quick_event_rom_intro_welcome">Welcome to the horizondroid.</string>
@@ -290,5 +291,6 @@
 
     <!-- Memory info -->
      <string name="meminfo_text">%1$s Available | %2$s Total</string>
+     <string name="recents_meminfo_title">Memory info</string>
 
 </resources>
