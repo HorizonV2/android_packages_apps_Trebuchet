@@ -19,6 +19,7 @@ package com.android.launcher3;
 import static com.android.launcher3.BuildConfig.WIDGET_ON_FIRST_SCREEN;
 import static com.android.launcher3.Flags.enableSmartspaceAsAWidget;
 import static com.android.launcher3.icons.BitmapInfo.FLAG_THEMED;
+import static com.android.launcher3.taskbar.TaskbarManager.ENABLE_TASKBAR;
 import static com.android.launcher3.util.SplitConfigurationOptions.STAGE_POSITION_BOTTOM_OR_RIGHT;
 import static com.android.launcher3.util.SplitConfigurationOptions.STAGE_POSITION_TOP_OR_LEFT;
 import static com.android.launcher3.util.SplitConfigurationOptions.STAGE_TYPE_MAIN;
@@ -95,6 +96,7 @@ import com.android.launcher3.shortcuts.ShortcutRequest;
 import com.android.launcher3.testing.shared.ResourceUtils;
 import com.android.launcher3.util.FlagOp;
 import com.android.launcher3.util.IntArray;
+import com.android.launcher3.util.SettingsCache;
 import com.android.launcher3.util.SplitConfigurationOptions.SplitPositionOption;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.views.ActivityContext;
@@ -1065,7 +1067,10 @@ public final class Utilities {
 
     public static boolean isTablet(Context context) {
         int smallestWidthDp = context.getResources().getConfiguration().smallestScreenWidthDp;
-        return smallestWidthDp >= 600;
+        boolean isTablet = smallestWidthDp >= 600;
+        boolean enableTaskbar = SettingsCache.INSTANCE.get(context).getValue(ENABLE_TASKBAR,
+                        isTablet ? 1 : 0);
+        return isTablet || enableTaskbar;
     }
     
     public static boolean isGsaInstalled(Context context) {
