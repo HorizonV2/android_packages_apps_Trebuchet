@@ -365,17 +365,18 @@ public class SettingsActivity extends FragmentActivity
                 case NOTIFICATION_DOTS_PREFERENCE_KEY:
                     return BuildConfig.NOTIFICATION_DOTS_ENABLED;
                 case KEY_ICON_PACK:
-                     mIconPackPref = (ReloadingListPreference) preference;
-                     mIconPackPref.setValue(IconDatabase.getGlobal(getActivity()));
-                     mIconPackPref.setOnReloadListener(IconPackPrefSetter::new);
-                     mIconPackPref.setIcon(getPackageIcon(IconDatabase.getGlobal(getActivity())));
-                     mIconPackPref.setOnPreferenceChangeListener((pref, val) -> {
-                         IconDatabase.clearAll(getActivity());
-                         IconDatabase.setGlobal(getActivity(), (String) val);
-                         mIconPackPref.setIcon(getPackageIcon((String) val));
-                         AppReloader.get(getActivity()).reload();
-                         return true;
-                     });
+                    mIconPackPref = (ReloadingListPreference) preference;
+                    mIconPackPref.setValue(IconDatabase.getGlobal(getActivity()));
+                    mIconPackPref.setOnReloadListener(IconPackPrefSetter::new);
+                    mIconPackPref.setIcon(getPackageIcon(IconDatabase.getGlobal(getActivity())));
+                    mIconPackPref.setOnPreferenceChangeListener((pref, val) -> {
+                        IconDatabase.clearAll(getActivity());
+                        IconDatabase.setGlobal(getActivity(), (String) val);
+                        mIconPackPref.setIcon(getPackageIcon((String) val));
+                        AppReloader.get(getActivity()).reload();
+                        return true;
+                    });
+                    return true;
                 case ALLOW_ROTATION_PREFERENCE_KEY:
                     if (Flags.oneGridSpecs()) {
                         return false;
