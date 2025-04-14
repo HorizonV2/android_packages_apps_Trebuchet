@@ -299,15 +299,14 @@ public class AppsSearchContainerLayout extends ExtendedEditText
                 int startWidth = startDrawable.getIntrinsicWidth();
                 int startHeight = startDrawable.getIntrinsicHeight();
 
-                int paddingStart = getPaddingStart();
-                int startLeft = getCompoundPaddingLeft();
+                int startLeft = getPaddingStart();
                 int startTop = (getHeight() - startHeight) / 2;
 
                 Rect searchBounds = new Rect(
-                    startLeft - paddingStart,
-                    startTop - paddingStart,
-                    startLeft + startWidth + paddingStart,
-                    startTop + startHeight + paddingStart
+                    startLeft,
+                    startTop,
+                    startLeft + startWidth,
+                    startTop + startHeight
                 );
 
                 if (searchBounds.contains((int) x, (int) y)) {
