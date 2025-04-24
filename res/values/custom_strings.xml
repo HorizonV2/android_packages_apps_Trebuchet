@@ -281,7 +281,8 @@
     <string name="pref_hotseat_enabled_title">Show hotseat search bar</string>
     
     <!-- Lock -->
-    <string name="action_lock">Lock/Unlock app</string>
+    <string name="action_locked">Lock app</string>
+    <string name="action_unlocked">Unlock app</string>
     <string name="unlock_app">Unlocked app in recents</string>
     <string name="lock_app">Locked app in recents</string>
 </resources>
