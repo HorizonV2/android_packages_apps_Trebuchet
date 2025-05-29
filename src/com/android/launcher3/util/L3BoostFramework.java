@@ -16,12 +16,15 @@
 package com.android.launcher3.util;
 
 import android.os.IBinder;
+import android.os.PerformanceHintManager;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
 import com.android.internal.os.IBoostFramework;
+
+import java.util.concurrent.TimeUnit;
 
 public class L3BoostFramework {
 
@@ -42,6 +45,8 @@ public class L3BoostFramework {
     private long mAnimationBoost = ANIMATION_BOOST_OFF;
     
     private static IBoostFramework sService;
+    private PerformanceHintManager mPerformanceHintManager;
+    private PerformanceHintManager.Session mAdpfSession = null;
     
     private static L3BoostFramework instance = null;
 
@@ -60,6 +65,13 @@ public class L3BoostFramework {
             sService = IBoostFramework.Stub.asInterface(binder);
         }
         return sService;
+    }
+    
+    public void createAdpfSession(PerformanceHintManager performanceHintManager) {
+        int[] tids = {
+          android.os.Process.myTid()
+        };
+        mAdpfSession = performanceHintManager.createHintSession(tids, TimeUnit.SECONDS.toNanos(1));
     }
 
     public void bindBigCore() {
@@ -82,6 +94,12 @@ public class L3BoostFramework {
             executeSetThreadAffinity(STATUS_UNBIND);
         }
     }
+    
+    private void sendAdpfHint(int hint) {
+        if (mAdpfSession != null) {
+            mAdpfSession.sendHint(hint);
+        }
+    }
 
     public void animationBoostOn(int type) {
         mAnimationBoostType |= type;
@@ -89,6 +107,7 @@ public class L3BoostFramework {
             bindBigCore();
             mAnimationBoost = ANIMATION_BOOST_ON;
             executeSetAnimationBoost(ANIMATION_BOOST_ON);
+            sendAdpfHint(PerformanceHintManager.Session.CPU_LOAD_UP);
         }
     }
 
@@ -98,6 +117,7 @@ public class L3BoostFramework {
             unbind();
             mAnimationBoost = ANIMATION_BOOST_OFF;
             executeSetAnimationBoost(ANIMATION_BOOST_OFF);
+            sendAdpfHint(PerformanceHintManager.Session.CPU_LOAD_RESET);
         }
     }
 

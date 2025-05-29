@@ -131,6 +131,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.PerformanceHintManager;
 import android.os.StrictMode;
 import android.os.SystemClock;
 import android.os.Trace;
@@ -616,6 +617,9 @@ public class Launcher extends StatefulActivity<LauncherState>
                     RuleController.parseRules(this, R.xml.split_configuration));
         }
         TestEventEmitter.INSTANCE.get(this).sendEvent(TestEvent.LAUNCHER_ON_CREATE);
+        PerformanceHintManager performanceHintManager =
+          (PerformanceHintManager) this.getSystemService(Context.PERFORMANCE_HINT_SERVICE);
+        L3BoostFramework.INSTANCE().createAdpfSession(performanceHintManager);
     }
 
     protected ModelCallbacks createModelCallbacks() {
